@@ -1,3 +1,4 @@
+from datetime import timedelta
 import os
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
@@ -180,3 +181,18 @@ CKEDITOR_5_CONFIGS = {
         'toolbar': ['bold', 'italic', 'link'],
     },
 }
+
+AUTH_USER_MODEL = "testapp.CustomUser"
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=45),  # Токен живёт 1 час
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=4),     # Рефреш живёт 1 день
+    'AUTH_HEADER_TYPES': ('Bearer',),                # В заголовке пишем Bearer <token>
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+}
+
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")
